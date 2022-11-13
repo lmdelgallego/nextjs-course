@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 function handler (req, res) {
+  console.log(req.body);
   if(req.method === 'POST') {
     const {email, text} = req.body;
     const newFeedback = {
