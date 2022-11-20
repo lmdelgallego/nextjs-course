@@ -7,7 +7,7 @@ function FeedbackPage(props) {
 
   // how to get the data from the server form dynamic route
   function loadFeedbackHandler(id) {
-    fetch(`/api/${id}`)
+    fetch(`/api/feedback/${id}`)
       .then((response) => response.json())
       .then(({ feedback }) => {
         setFeedbackData(feedback)

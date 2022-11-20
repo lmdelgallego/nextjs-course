@@ -1,7 +1,9 @@
-import { buildFeedbackPath, extractFeedback } from "./feedback";
+import { buildFeedbackPath, extractFeedback } from ".";
+
+// api/feedback/feedbackId
 
 function handler(req, res) {
-  const feedbackId = req.query.feedbackId; // 'c3'
+  const feedbackId = req.query.feedbackId;
   const filePath = buildFeedbackPath();
   const feedbackData = extractFeedback(filePath);
   const selectedFeedback = feedbackData.find((feedback) => feedback.id === feedbackId);
