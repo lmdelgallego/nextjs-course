@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const uri = `mongodb+srv://admin:${process.env.MONGO_PASSWORD}@cluster0.onpg1w3.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://admin:${process.env.MONGO_PASSWORD}@cluster0.onpg1w3.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 
 async function handler(req, res) {
   if (req.method === 'POST') {
