@@ -34,17 +34,19 @@ async function handler(req, res) {
     }
 
     const db = client.db();
-    const result = await db.collection('newsletter').insertOne(newComment);
+    const result = await db.collection('comments').insertOne(newComment);
     console.log(result);
     res.status(201).json({ message: "Added comment!", comment: newComment })
   }
 
   if (req.method === 'GET') {
-    const dummyList = [
-      { id: 'c1', name: 'Max', text: 'A first comment!' },
-      { id: 'c2', name: 'Manuel', text: 'A second comment!' },
-    ];
-    res.status(201).json({ comments: dummyList });
+    const db = client.db();
+    const documents = await db
+      .collection('comments')
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
+    res.status(201).json({ comments: documents });
   }
 
   client.close();
