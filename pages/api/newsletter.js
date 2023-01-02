@@ -1,16 +1,5 @@
-import { MongoClient } from 'mongodb';
+import { connectDatabase, insertDocument } from '../../helpers/db-util';
 
-const uri = `mongodb+srv://admin:${process.env.MONGO_PASSWORD}@cluster0.onpg1w3.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
-
-async function connectDatabase() {
-  return await MongoClient.connect(uri)
-}
-
-async function insertDocument(client, document) {
-  const db = client.db();
-  const result = await db.collection('newsletter').insertOne(document);
-  return result;
-}
 async function handler(req, res) {
   let client;
   if (req.method === 'POST') {
@@ -31,7 +20,7 @@ async function handler(req, res) {
     }
 
     try {
-      await insertDocument(client, { email: userEmail });
+      await insertDocument(client, 'newsletter', { email: userEmail });
       client.close();
     }
     catch (error) {
