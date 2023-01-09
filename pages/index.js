@@ -1,5 +1,10 @@
+import { Fragment } from "react"
+
 function HomePage() {
-  return <div>Welcome to Next.js!</div>
+  return <Fragment>
+    <Hero />
+    <FeaturePosts />
+  </Fragment>
 }
 
 export default HomePage
