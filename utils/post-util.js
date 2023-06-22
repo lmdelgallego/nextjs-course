@@ -19,14 +19,14 @@ function getPostData (fileName) {
   return postData;
 }
 
-function getAllPosts () {
+export function getAllPosts () {
   const postFiles = fs.readdirSync(postDirectory);
   const allPosts = postFiles.map(postFile => getPostData(postFile))
   const sortedPosts = allPosts.sort( (postA, postB) => postA.date > postB.date ? -1 : 1 )
   return sortedPosts;
 }
 
-function getFeaturePosts() {
+export function getFeaturePosts() {
   const allPosts = getAllPosts()
   const featurePosts = allPosts.filter(post => post.isFeatured )
   return featurePosts;
