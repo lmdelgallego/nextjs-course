@@ -2,7 +2,9 @@ import { hashPassword } from "../../../lib/auth";
 import { connectToDataBase, createIndex, insertDocument } from "../../../lib/db";
 
 async function handler (req, res) {
-
+  if (req.method !== 'POST') {
+    return;
+  }
   const data = req.body;
   const { email, password } = data;
 
@@ -10,9 +12,9 @@ async function handler (req, res) {
     res.status(422).json({message: 'Invalid credentials'})
     return;
   }
-  const client = connectToDataBase();
+  const client = await connectToDataBase();
   const hashedPassword = await hashPassword(password);
-  insertDocument(client, 'users', {
+  await insertDocument(client, 'users', {
     email: email,
     password: hashedPassword
   });
