@@ -11,8 +11,8 @@ export default NextAuth({
   providers: [
     Providers.Credentials({
       authorize: async (credentials) => {
-        const client = connectToDataBase();
-        const user = findDocument(client, 'user', { email: credentials.email });
+        const client = await connectToDataBase();
+        const user = await findDocument(client, 'users', { email: credentials.email });
 
         if (!user) {
           client.close();
